@@ -140,79 +140,20 @@
                                 <div class="tab-pane active" id="profile">
                                     <table class="table">
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes" checked>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asdfasdf"</td>
+                                            <tr *ngFor="let task of taskList">
+                                                <td>{{task.locoId}}</td>
+                                                <td>{{task.repairman}}</td>
+                                                <td>{{task.status}}</td>
+                                                <td>{{task.description}}</td>
                                                 <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs">
+                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs" (click)="onEdit(task)">
                                                         <i class="material-icons">edit</i>
                                                     </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="onDelete(task.$key)">
                                                         <i class="material-icons">close</i>
                                                     </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes">
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asfasdf</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn  btn-simple btn-xs">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes">
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asdfasfadsfd
-                                                </td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn  btn-simple btn-xs">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes" checked>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asdfasdfds</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn  btn-simple btn-xs">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                                </td> 
+                                            </tr>                                          
                                         </tbody>
                                     </table>
                                 </div>
@@ -324,52 +265,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-6 col-md-12">
-                    <div class="card" >
-                        <div class="card-header">
-                            <h4 class="title">Employees Task Status</h4>
-                        </div>
-                        <div class="card-content table-responsive">
-                            <table class="table table-hover">
-                                <thead class="text-warning">
-                                    <tr>
-                                        <th>RACF</th>
-                                        <th>Name</th>
-                                        <th>Title</th>
-                                        <th>Pending Tasks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>4</td>
-                                        <td>4</td>
-                                        <td>4</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
@@ -377,12 +273,12 @@
                         </div>
                         <div class="card-content">
                             <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
-                                <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="taskService.selectedTask.$key">        
+                                <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="taskService.selectedTask.$key">     
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group form-black label-floating is-empty">
                                             <label class="control-label">LOCO ID</label>
-                                            <input #locoId="ngModel" [(ngModel)]="taskService.selectedTask.locoId" type="text" class="form-control" >
+                                            <input #locoId="ngModel"  name="locoId" [(ngModel)]="taskService.selectedTask.locoId" type="text" class="form-control" >
                                         </div>
                                     </div>
                                 </div> 
@@ -390,7 +286,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-black label-floating is-empty">
                                             <label class="control-label">Repairman</label>
-                                            <input #repairman="ngModel" [(ngModel)]="taskService.selectedTask.repairman" type="text" class="form-control" >
+                                            <input #repairman="ngModel" name="repairman" [(ngModel)]="taskService.selectedTask.repairman" type="text" class="form-control" >
                                         </div>
                                     </div>
                                 </div> 
@@ -398,7 +294,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-black label-floating is-empty">
                                             <label class="control-label">Status</label>
-                                            <input #status="ngModel" [(ngModel)]="taskService.selectedTask.status" type="text" class="form-control" >
+                                            <input #status="ngModel"   name="status" [(ngModel)]="taskService.selectedTask.status" type="text" class="form-control" >
                                         </div>
                                     </div>
                                 </div> 
@@ -406,17 +302,62 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-black label-floating is-empty">
                                             <label class="control-label">Description</label>
-                                            <input #description="ngModel" [(ngModel)]="taskService.selectedTask.description" type="text" class="form-control" >
+                                            <input #description="ngModel"  name="description" [(ngModel)]="taskService.selectedTask.description" type="text" class="form-control" >
                                         </div>
                                     </div>
                                 </div>         
-                                <button type="submit" class="btn  pull-right" data-background-color="green" [disabled]="!employeeForm.valid"><i class="fa fa-plus"></i> NEW TASK</button>
+                                <button type="submit" class="btn  pull-right" data-background-color="green" [disabled]="!taskForm.valid"><i class="fa fa-plus"></i> NEW TASK</button>
                                 <button type="button" class="btn  pull-right" data-background-color="orange" (click)="resetForm(taskForm)"><i class="fa fa-repeat"></i> RESET</button>
                                 <div class="clearfix"></div>
                             </form>
                         </div>
                     </div>
-                </div>                
+                </div>
+                <div class="col-lg-6 col-md-12">
+                        <div class="card" >
+                            <div class="card-header">
+                                <h4 class="title">Employees Task Status</h4>
+                            </div>
+                            <div class="card-content table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="text-warning">
+                                        <tr>
+                                            <th>RACF</th>
+                                            <th>Name</th>
+                                            <th>Title</th>
+                                            <th>Pending Tasks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                            <td>4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>                
             </div>
         </div>
 </div>

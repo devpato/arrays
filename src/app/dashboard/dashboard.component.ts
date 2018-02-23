@@ -168,13 +168,13 @@ export class DashboardComponent implements OnInit {
 
 //TABLE OPERATIONS
 onEdit(task: any ) {
-  this.taskService.selectedEmployee = Object.assign({}, task);
+  this.taskService.selectedTask = Object.assign({}, task);
 }
 
 onDelete(key: string) {
   if (confirm('Are you sure to delete this record ?') == true) {
     this.taskService.deleteTask(key);
-    console.log("Deleted Successfully", "Employee register");
+    console.log("Deleted Successfully", "Task register");
   }
 }
 
@@ -182,7 +182,7 @@ onDelete(key: string) {
 resetForm(taskForm?: NgForm) {
   if (taskForm != null)
   taskForm.reset();
-  this.taskService.selectedEmployee = {
+  this.taskService.selectedTask = {
     $key: null,
     locoId: '',
     repairman: '',
@@ -191,12 +191,16 @@ resetForm(taskForm?: NgForm) {
   }
 }
   onSubmit(taskForm: NgForm) {
-    if (taskForm.value.$key == null)
+    if (taskForm.value.$key == null) {
+       console.log(taskForm.value);
       this.taskService.insertTask(taskForm.value);
-    else
+      console.log("Task Created");
+    }else{
       this.taskService.updateTask(taskForm.value);
-    this.resetForm(taskForm);
-    console.log("Task Created");
+      this.resetForm(taskForm);
+      console.log("Task Updated");
+    }
+      
   }
 }
 
