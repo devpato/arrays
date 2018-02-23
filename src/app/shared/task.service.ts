@@ -23,7 +23,7 @@ export class TaskService {
    });
  }
 
- updateEmployee(task : Task){
+ updateTask(task : Task){
    this.taskList.update(task.$key,
      {
         locoId: task.locoId,
@@ -33,7 +33,7 @@ export class TaskService {
      });
  }
 
- deleteEmployee($key : string){
+ deleteTask($key : string){
    this.taskList.remove($key);
  }
 
