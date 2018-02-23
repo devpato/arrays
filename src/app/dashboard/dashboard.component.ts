@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { TaskService } from '../shared/task.service'
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  providers: [TaskService]
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private taskService : TaskService) { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -146,5 +148,10 @@ export class DashboardComponent implements OnInit {
       //start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(emailsSubscriptionChart);
   }
+  /****
+   * FIREBASE CRUD FOR TASK
+   */
+
+   
 
 }
