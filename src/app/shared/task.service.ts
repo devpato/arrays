@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
 import {Task} from './task.model';
 @Injectable()
-export class EmployeeService {
+export class TaskService {
  taskList: AngularFireList<any>;
  selectedEmployee: any;
  constructor(private firebase :AngularFireDatabase ) { }
