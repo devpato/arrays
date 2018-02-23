@@ -102,3 +102,10 @@ my-app .main-panel .main-content .card{
 .btn-primary {
     background-color: #00467f !important;
 }
+
+input.ng-invalid.ng-dirty{
+    border: 1px solid red;
+}
+button:hover,a.btn:hover{
+    cursor: pointer;
+}
