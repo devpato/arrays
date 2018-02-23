@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "4.4.4",
     "@angular/platform-server": "4.4.4",
     "@angular/router": "4.4.4",
+    "angularfire2": "^5.0.0-rc.3",
     "arrive": "2.4.1",
     "bootstrap": "3.3.7",
     "bootstrap-material-design": "0.5.10",
@@ -29,6 +30,7 @@
     "chartist": "0.11.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "2.4.1",
+    "firebase": "^4.6.1",
     "googleapis": "19.0.0",
     "jquery": "3.2.1",
     "moment": "2.18.1",
@@ -38,7 +40,7 @@
     "zone.js": "0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.4.2",
+    "@angular/cli": "^1.7.1",
     "@angular/compiler-cli": "4.4.4",
     "@types/bootstrap": "3.3.32",
     "@types/chartist": "0.9.34",
