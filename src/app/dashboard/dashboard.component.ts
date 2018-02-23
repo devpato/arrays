@@ -187,7 +187,8 @@ resetForm(taskForm?: NgForm) {
     locoId: '',
     repairman: '',
     status: '',
-    description: ''
+    description: '',
+    arrivalDate: ''
   }
 }
   onSubmit(taskForm: NgForm) {

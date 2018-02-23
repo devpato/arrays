@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    
 
     constructor(location: Location,  private element: ElementRef) {
       this.location = location;

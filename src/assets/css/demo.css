@@ -109,3 +109,11 @@ input.ng-invalid.ng-dirty{
 button:hover,a.btn:hover{
     cursor: pointer;
 }
+
+.statusDropdown option {
+    font-size: 16px;
+}
+
+.statusDropdown {
+    width: 150px;
+}

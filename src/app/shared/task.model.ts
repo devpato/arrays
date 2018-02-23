@@ -4,4 +4,5 @@ export class Task {
     repairman : string;
     status : string;
     description : string;
+    arrivalDate: string;
 }

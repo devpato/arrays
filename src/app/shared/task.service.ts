@@ -19,7 +19,8 @@ export class TaskService {
     locoId: task.locoId,
     repairman: task.repairman,
     status: task.status,
-    description: task.description
+    description: task.description,
+    arrivalDate: task.arrivalDate
    });
  }
 
@@ -29,7 +30,8 @@ export class TaskService {
         locoId: task.locoId,
         repairman: task.repairman,
         status: task.status,
-        description: task.description
+        description: task.description,
+        arrivalDate: task.arrivalDate
      });
  }
 
