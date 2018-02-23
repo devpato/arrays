@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms'
   providers: [TaskService]
 })
 export class DashboardComponent implements OnInit {
-
+  taskList: any[]
   constructor(private taskService : TaskService) { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -148,13 +148,37 @@ export class DashboardComponent implements OnInit {
       //start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(emailsSubscriptionChart);
 
-      this.resetForm();   
+      this.resetForm();  
+   /****
+   * FIREBASE DISPLAY TASK
+   */ 
+   
+
+   //Pull the data
+   var x = this.taskService.getData();
+   x.snapshotChanges().subscribe(item => {
+     this.taskList = [];
+     item.forEach(element => {
+       var y = element.payload.toJSON();
+       y["$key"] = element.key;
+       this.taskList.push(y as any);
+     });
+   });
+}
+
+//TABLE OPERATIONS
+onEdit(task: any ) {
+  this.taskService.selectedEmployee = Object.assign({}, task);
+}
+
+onDelete(key: string) {
+  if (confirm('Are you sure to delete this record ?') == true) {
+    this.taskService.deleteTask(key);
+    console.log("Deleted Successfully", "Employee register");
   }
-  /****
-   * FIREBASE CRUD FOR TASK
-   */
+}
 
-
+//FORM OPERATIONS
 resetForm(taskForm?: NgForm) {
   if (taskForm != null)
   taskForm.reset();
