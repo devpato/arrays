@@ -15,6 +15,16 @@ import { TableListComponent } from './table-list/table-list.component';
 
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { TasksComponent } from './tasks/tasks.component';
+
+
+/********
+ * FIREBASE CONFIGURATION
+ */
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,12 +34,16 @@ import { NotificationsComponent } from './notifications/notifications.component'
     TableListComponent,
     MapsComponent,
     NotificationsComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     ComponentsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    
 RouterModule,
     AppRoutingModule
   ],
