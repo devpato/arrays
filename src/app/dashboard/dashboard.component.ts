@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import { TaskService } from '../shared/task.service'
-
+import { NgForm } from '@angular/forms'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -147,11 +147,33 @@ export class DashboardComponent implements OnInit {
 
       //start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(emailsSubscriptionChart);
+
+      this.resetForm();   
   }
   /****
    * FIREBASE CRUD FOR TASK
    */
 
-   
 
+resetForm(taskForm?: NgForm) {
+  if (taskForm != null)
+  taskForm.reset();
+  this.taskService.selectedEmployee = {
+    $key: null,
+    locoId: '',
+    repairman: '',
+    status: '',
+    description: ''
+  }
 }
+  onSubmit(taskForm: NgForm) {
+    if (taskForm.value.$key == null)
+      this.taskService.insertTask(taskForm.value);
+    else
+      this.taskService.updateTask(taskForm.value);
+    this.resetForm(taskForm);
+    console.log("Task Created");
+  }
+}
+
+
