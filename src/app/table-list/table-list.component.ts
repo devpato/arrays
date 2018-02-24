@@ -40,7 +40,7 @@ export class TableListComponent implements OnInit {
          });
         this.closetDis = this.findClosestDestination(this.list,this.ptcShops);
 
-       // this.trainList = this.mapTrainsWithDest(this.closetDis, this.trains);
+        this.groupDest = this.mapCityWithDest(this.closetDis, ['HUNTINGTON SHOP']);
        });
     });
   }
@@ -61,7 +61,6 @@ export class TableListComponent implements OnInit {
     var citySelected = [];
     citySelected.push(value);
     this.groupDest = this.mapCityWithDest(this.closetDis, citySelected);
-    console.log(this.groupDest);
   }
 
   findClosestDestination(compareDestList, compareShopList) {
