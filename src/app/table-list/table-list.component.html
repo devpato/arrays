@@ -4,8 +4,8 @@
             <div class="form-group form-black label-floating is-empty">
                 <label class="control-label">Shop Locations</label>
                 <div class="dropdown">
-                    <select class="btn btn-info statusDropdown" (change) = "changeShop($event)">
-                        <option *ngFor="let i of ptcShops">{{i.CITY_N}}</option>
+                    <select class="btn btn-info statusDropdown" #city (change) = "changeShop(city.value)">
+                        <option *ngFor="let i of ptcShops" [value]="i.CITY_N">{{i.CITY_N}}</option>
                     </select>
                 </div>
             </div>
@@ -22,28 +22,22 @@
                                 <tr>
                                     <th>LOCO ID</th>
                                     <th>TRAN ID</th>
-                                    <th>DEVICE ID</th>
-                                    <th>LATITUDE</th>
-                                    <th>LONGITUDE</th>
-                                    <th>SPEED</th>
-                                    <th>STRENGTH</th>
-                                    <th>QUALITY</th>
-                                    <th>SUBDIVISION</th>
-                                    <th>DATE</th>
+                                    <th>TRAIN ORIGINATION</th>
+                                    <th>DESTINATON LATITUDE</th>
+                                    <th>DESTINATION LONGITUDE</th>
+                                    <th>ORIGINAL LATITUDE</th>
+                                    <th>ORIGINAL LONGITUDE</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let train of locomotives">
-                                    <td>{{train.LOCO_I}}</td>
+                                <tr *ngFor="let train of groupDest">
+                                    <td>{{train.LOCOMOTIVE_I}}
                                     <td>{{train.TRAIN_I}}</td>
-                                    <td>{{train.DEVICE_I}}</td>
-                                    <td>{{train.LATITUDE_M}}</td>
-                                    <td>{{train.LONGITUDE_M}}</td>
-                                    <td>{{train.LOCO_SPEED_M}}</td>
-                                    <td>{{train.SIGNAL_STRENGTH_M}}</td>
-                                    <td>{{task.SIGNAL_QUALITY_C}}</td>
-                                    <td>{{task.TRANS_SUBDIV_C}}</td>
-                                    <td>{{task.REPORT_EST_D}}</td> 
+                                    <td>{{train.TRAIN_ORIGINATION_D}}</td>
+                                    <td>{{train.DEST_LAT}}</td>
+                                    <td>{{train.DEST_LON}}</td>
+                                    <td>{{train.ORIG_LAT}}</td>
+                                    <td>{{train.ORIG_LON}}</td>
                                 </tr>
                             </tbody>
                         </table>
