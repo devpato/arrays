@@ -117,3 +117,7 @@ button:hover,a.btn:hover{
 .statusDropdown {
     width: 150px;
 }
+
+agm-map {
+    height: 300px;
+  }

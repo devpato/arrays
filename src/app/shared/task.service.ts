@@ -5,6 +5,7 @@ import {Task} from './task.model';
 @Injectable()
 export class TaskService {
  taskList: AngularFireList<any>;
+ shopList: AngularFireList<any>;
  selectedTask: any;
  constructor(private firebase :AngularFireDatabase ) { }
 
@@ -12,6 +13,11 @@ export class TaskService {
    this.taskList = this.firebase.list('/tasks'); //if we want to do the users taks will be /Y4072/tasks
    return this.taskList;
  }
+
+ getShops(){
+  this.shopList = this.firebase.list('/shops'); //if we want to do the users taks will be /Y4072/tasks
+  return this.shopList;
+}
 
  insertTask(task : any)
  {
