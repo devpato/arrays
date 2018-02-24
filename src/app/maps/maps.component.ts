@@ -81,10 +81,7 @@ export class MapsComponent implements OnInit {
 
 deg2rad(deg) {
   return deg*(Math.PI/180);
-<<<<<<< HEAD
 }
-=======
-} 
->>>>>>> 2981fa907ec426cb98b6aaca64c44fa7d1799ddb
+
 
 }
