@@ -107,7 +107,7 @@ export class DashboardComponent implements OnInit {
       const dataCompletedTasksChart: any = {
           labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
           series: [
-              [230, 750, 450, 300, 280, 240, 200, 190]
+              [2, 7, 4, 3, 6, 8, 8, 9]
           ]
       };
 
@@ -116,7 +116,7 @@ export class DashboardComponent implements OnInit {
               tension: 0
           }),
           low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 10, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
       }
 
@@ -196,80 +196,6 @@ export class DashboardComponent implements OnInit {
     this.notStartedNumber = this.notStartedTaskList.length;
 
    });
-
-   var y = this.taskService.getShopData();
-   y.snapshotChanges().subscribe(item => {
-     this.taskList = [];
-     item.forEach(element => {
-       var q = element.payload.toJSON();
-       q["$key"] = element.key;
-       this.taskList.push(q as any);
-     });
-
-     this.shopList = this.taskList.filter((el)=> {
-        return el.PTC === 1; 
-     });
-   });
-
-    var destination = this.taskService.getDestinationData();
-    destination.snapshotChanges().subscribe(item => {
-        this.taskList = [];
-        item.forEach(element => {
-          var q = element.payload.toJSON();
-          q["$key"] = element.key;
-          this.taskList.push(q as any);
-        });
-
-        this.destList = this.taskList;
-     });
-}
-
-findClosestDestination(compareDestList, compareShopList) {
-  var distance;
-  for (var i=0; i<compareDestList.length; i++) {
-    for (var j=0; j<compareShopList[i].length; j++) {
-      distance = this.getDistanceFromLatLonInKm(compareDestList[i].LAT, compareDestList[i].LON, compareShopList[j].LAT, compareShopList[j].LON);
-      if (distance <= 125) {
-        if (compareShopList[j].shopList && typeof compareShopList[j].shopList.isArray() ) {
-          compareShopList[j].shopList.push(compareDestList[i]);
-        } else {
-          compareShopList[j].shopList = [];
-          compareShopList[j].shopList.push(compareDestList[i]);
-        }
-      }
-    }
-    // Thres hold for shop area is 125 feet
-  }
-
-  return compareShopList;
-}
-
-getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-    var R = 3959; // Radius of the earth in (6371) km
-
-    var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
-
-    var dLon = this.deg2rad(lon2-lon1);
-
-    var a =
-
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-
-    Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-  var d = R * c; // Distance in km
-
-  return d;
-}
-
-deg2rad(deg) {
-
-  return deg * (Math.PI/180)
-
 }
 
 //TABLE OPERATIONS

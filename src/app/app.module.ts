@@ -26,6 +26,11 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 
+/**
+ * Google Maps
+ */
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +48,9 @@ import { environment } from '../environments/environment';
     ComponentsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDq9IN8QYohiqlbi0tNdST_sEZRz6N6Ea8'
+    }),
     
 RouterModule,
     AppRoutingModule

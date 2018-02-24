@@ -1,1 +1,12 @@
-<div id="map"></div>
+
+
+<agm-map  style="height: 100vh;" [latitude]="31.18317569" [longitude]="-82.3937315" [zoom]="zoom">
+    <agm-circle *ngFor="let shop of ptcShops" [latitude]="shop.LAT" [longitude]="shop.LON" [radius]='201167.5' [fillColor]="'#00467f'">               
+    </agm-circle>
+    <agm-marker *ngFor="let des of closetDis" [latitude]="des.LAT"  [longitude]="des.LON">
+        <agm-info-window>
+            <strong><p>{{des.CITY_N}}</p></strong>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>
+
