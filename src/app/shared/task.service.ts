@@ -52,4 +52,8 @@ export class TaskService {
    this.taskList.remove($key);
  }
 
+ deleteLoco(LOCOMOTIVE_I : string){
+  this.destList.remove(LOCOMOTIVE_I);
+}
+
 }

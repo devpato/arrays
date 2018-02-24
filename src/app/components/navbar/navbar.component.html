@@ -23,7 +23,7 @@
                     </a>
                     <ul class="dropdown-menu" style="width: 250px; height: 250px;padding-left: 10%;overflow-y:auto">
                             <div class="card-header" style="background-color: #f44336 !important">
-                                <p style="color:white">Ad Hoc</p>
+                                <p style="color:white">Pending</p>
                             </div>
                         <div  *ngFor="let task of urgencyTaskList">
                             <li>{{task.locoId}} - {{task.description}}</li>
@@ -33,16 +33,6 @@
                     </ul>
                 </li>
             </ul>
-
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group form-black is-empty">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <span class="material-input"></span>
-                </div>
-                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                    <i class="material-icons">search</i><div class="ripple-container"></div>
-                </button>
-            </form>
         </div>
     </div>
 </nav>

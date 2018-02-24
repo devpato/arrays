@@ -40,7 +40,7 @@
                             <i class="material-icons">info_outline</i>
                         </div>
                         <div class="card-content">
-                            <p class="category">Ad Hoc</p>
+                            <p class="category">Pending</p>
                             <h3 class="title">{{urgencyTaskList.length}}</h3>
                         </div>
                         <div class="card-footer">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="card-content">
                             <p class="category">Incoming</p>
-                            <h3 class="title">{{notStartedNumber}}</h3>
+                            <h3 class="title">{{closetDis.length}}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -86,7 +86,7 @@
                                 <div class="ct-chart" id="completedTasksChart"></div>
                             </div>
                             <div class="card-content">
-                                <h4 class="title">Ad Hoc</h4>
+                                <h4 class="title">Pending</h4>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                                         <li class="">
                                             <a href="#settings" data-toggle="tab"  data-background-color="red">
                                                 <i class="material-icons"></i>
-                                                Ad Hoc
+                                                Pending
                                             <div class="ripple-container"></div></a>
                                         </li>
                                     </ul>
@@ -239,16 +239,21 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group form-black label-floating is-empty">
-                                            <label class="control-label">LOCO ID</label>
-                                            <input #locoId="ngModel"  name="locoId" [(ngModel)]="taskService.selectedTask.locoId" type="text" class="form-control" >
+                                            <div class="dropdown">
+                                                <select (change)="delete($event.target)" class="btn btn-info statusDropdown" #locoId="ngModel"  name="locoId" [(ngModel)]="taskService.selectedTask.locoId" class="form-control">
+                                                        <option disabled selected value> --LOCO ID-- </option>
+                                                        <option *ngFor="let loc of closetDis" [value]='loc.LOCOMOTIVE_I'>
+                                                            {{loc.LOCOMOTIVE_I}}
+                                                        </option>    
+                                                </select>                                               
+                                             </div>
                                         </div>
                                     </div>
                                 </div> 
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group form-black label-floating is-empty">
-                                            <label class="control-label">Repairman</label>
-                                            <input #repairman="ngModel" name="repairman" [(ngModel)]="taskService.selectedTask.repairman" type="text" class="form-control" >
+                                            <input #repairman="ngModel"placeholder="Repairman" name="repairman" [(ngModel)]="taskService.selectedTask.repairman" type="text" class="form-control" >
                                         </div>
                                     </div>
                                 </div> 
@@ -258,10 +263,9 @@
                                             <label class="control-label">Status</label>
                                             <div class="dropdown">
                                                 <select #status="ngModel" class="btn btn-info statusDropdown" name="status" [(ngModel)]="taskService.selectedTask.status">
-                                                    <option disabled selected value> --Status -- </option>
-                                                    <option>Ad Hoc</option>
+                                                    <option disabled selected value> -- Status -- </option>
+                                                    <option>Pending</option>
                                                     <option>Completed</option>
-                                                    <option>Incoming</option>
                                                     <option>In Progress</option>
                                                 </select>
                                             </div>
@@ -271,16 +275,14 @@
                                 <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group form-black label-floating is-empty">
-                                                <label class="control-label">Arrival Date</label>
-                                                <input #arrivalDate="ngModel" name="arrivalDate" [(ngModel)]="taskService.selectedTask.arrivalDate" type="text" class="form-control" >
+                                                <input #arrivalDate="ngModel" name="arrivalDate" [(ngModel)]="taskService.selectedTask.arrivalDate" type="date" class="form-control" >
                                             </div>
                                         </div>
                                     </div>  
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group form-black label-floating is-empty">
-                                            <label class="control-label">Hardware</label>
-                                            <input #description="ngModel"  name="description" [(ngModel)]="taskService.selectedTask.description" type="text" class="form-control" >
+                                            <input #description="ngModel"  name="description" placeholder="Hardware" [(ngModel)]="taskService.selectedTask.description" type="text" class="form-control" >
                                         </div>
                                     </div>
                                 </div>         
@@ -290,52 +292,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                        <div class="card" >
-                            <div class="card-header">
-                                <h4 class="title">Employees Task Status</h4>
-                            </div>
-                            <div class="card-content table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="text-warning">
-                                        <tr>
-                                            <th>RACF</th>
-                                            <th>Name</th>
-                                            <th>Title</th>
-                                            <th>Pending Tasks</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>2</td>
-                                            <td>2</td>
-                                            <td>2</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>4</td>
-                                            <td>4</td>
-                                            <td>4</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>                
+                </div>               
             </div>
         </div>
 </div>

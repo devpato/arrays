@@ -20,6 +20,12 @@ export class DashboardComponent implements OnInit {
   completedTaskList: any[];
   inProgressTaskList: any[];
   notStartedTaskList: any[];
+  shops : any[]; 
+  ptcShops: any[];
+  destinations : any[]; 
+  closetDis: any[];
+  list : any[];
+  toBeDeleted : string;
   /*********/
 
   constructor(private taskService : TaskService) { }
@@ -99,7 +105,7 @@ export class DashboardComponent implements OnInit {
      });
 
      this.urgencyTaskList = this.taskList.filter((el)=> {
-      return el.status === 'Ad Hoc'
+      return el.status === 'Pending'
     });
 
     this.completedTaskList = this.taskList.filter((el)=> {
@@ -119,56 +125,56 @@ export class DashboardComponent implements OnInit {
     this.notStartedNumber = this.notStartedTaskList.length;
 
     /* ----------====================---------- */
-    //ADHOC graph
+    //ADHOC graph RED GRAPH
     var janList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '01'
+      return el.arrivalDate.split('-')[1] === '01'
     });
 
     var febList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '02'
+      return el.arrivalDate.split('-')[1] === '02'
     });
 
     var marchList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '03'
+      return el.arrivalDate.split('-')[1] === '03'
     });
 
     var apriList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '04'
+      return el.arrivalDate.split('-')[1] === '04'
     });
 
     var mayList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '05'
+      return el.arrivalDate.split('-')[1] === '05'
     });
 
     var junList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '06'
+      return el.arrivalDate.split('-')[1] === '06'
     });
 
     var julyList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '07'
+      return el.arrivalDate.split('-')[1] === '07'
     });
 
     var agtList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '08'
+      return el.arrivalDate.split('-')[1] === '08'
     });
 
     var sepList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '09'
+      return el.arrivalDate.split('-')[1] === '09'
     });
 
     var octList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '10'
+      return el.arrivalDate.split('-')[1] === '10'
     });
 
     var novList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '11'
+      return el.arrivalDate.split('-')[1] === '11'
     });
 
     var decList = this.urgencyTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '12'
+      return el.arrivalDate.split('-')[1] === '12'
     });
     const dataCompletedTasksChart: any = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         series: [
             [janList.length, febList.length, marchList.length, apriList.length, mayList.length, junList.length, julyList.length, agtList.length, sepList.length, octList.length, novList.length,decList.length]
         ]
@@ -189,51 +195,51 @@ export class DashboardComponent implements OnInit {
     this.startAnimationForLineChart(completedTasksChart);
     /* ----------===================---------- */
     var janListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '01'
+      return el.arrivalDate.split('-')[1] === '01'
     });
 
     var febListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '02'
+      return el.arrivalDate.split('-')[1] === '02'
     });
 
     var marchListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '03'
+      return el.arrivalDate.split('-')[1] === '03'
     });
 
     var apriListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '04'
+      return el.arrivalDate.split('-')[1] === '04'
     });
 
     var mayListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '05'
+      return el.arrivalDate.split('-')[1] === '05'
     });
 
     var junListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '06'
+      return el.arrivalDate.split('-')[1] === '06'
     });
 
     var julyListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '07'
+      return el.arrivalDate.split('-')[1] === '07'
     });
 
     var agtListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '08'
+      return el.arrivalDate.split('-')[1] === '08'
     });
 
     var sepListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '09'
+      return el.arrivalDate.split('-')[1] === '09'
     });
 
     var octListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '10'
+      return el.arrivalDate.split('-')[1] === '10'
     });
 
     var novListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '11'
+      return el.arrivalDate.split('-')[1] === '11'
     });
 
     var decListc = this.completedTaskList.filter((el)=> {
-      return el.arrivalDate.split('/')[0] === '12'
+      return el.arrivalDate.split('-')[1] === '12'
     });
 
     const dataDailySalesChart: any = {
@@ -257,58 +263,24 @@ export class DashboardComponent implements OnInit {
   this.startAnimationForLineChart(dailySalesChart);
 
   /* ----------====================---------- */
-  var janLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '01'
+  //3rd graph
+  var janLista = this.closetDis.filter((el)=> {
+    return el.DEST_LAT === 39.62992575
   });
 
-  var febLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '02'
+  var febLista = this.closetDis.filter((el)=> {
+    return el.DEST_LAT === 38.42227118
   });
 
-  var marchLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '03'
+  var marchLista = this.closetDis.filter((el)=> {
+    return el.DEST_LAT === 39.62992575
   });
-
-  var apriLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '04'
-  });
-
-  var mayLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '05'
-  });
-
-  var junLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '06'
-  });
-
-  var julyLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '07'
-  });
-
-  var agtLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '08'
-  });
-
-  var sepLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '09'
-  });
-
-  var octLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '10'
-  });
-
-  var novLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '11'
-  });
-
-  var decLista = this.notStartedTaskList.filter((el)=> {
-    return el.arrivalDate.split('/')[0] === '12'
-  });
-
+  console.log("graphsss")
+  console.log(this.closetDis)
   var dataEmailsSubscriptionChart = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    labels: ['WAYCROSS','HUNTINGTON','CUMBERLAND'],
     series: [
-      [janLista.length, febLista.length, marchLista.length, apriLista.length, mayLista.length, junLista.length, julyLista.length, agtLista.length, sepLista.length, octLista.length, novLista.length,decLista.length]
+      [1,2,3]
   ]
   };
   var optionsEmailsSubscriptionChart = {
@@ -335,6 +307,118 @@ export class DashboardComponent implements OnInit {
   this.startAnimationForBarChart(emailsSubscriptionChart);
 
    });
+   /*********************************/
+   var x = this.taskService.getShops();
+   x.snapshotChanges().subscribe(item => {
+     this.shops = [];
+     item.forEach(element => {
+       var y = element.payload.toJSON();
+       y["$key"] = element.key;
+       this.shops.push(y as any);
+     });
+
+     this.ptcShops = this.shops.filter((el)=> {
+        return el.PTC === 1; 
+     });
+
+     var z = this.taskService.getDestinationData();
+     z.snapshotChanges().subscribe(item => {
+        this.list = [];
+        item.forEach(element => {
+          var y = element.payload.toJSON();
+          y["$key"] = element.key;
+          this.list.push(y as any);
+        });
+       
+       this.closetDis = this.findClosestDestination(this.list,this.ptcShops);
+        /* ----------====================---------- */
+  //3rd graph
+  var janLista = this.closetDis.filter((el)=> {
+    return el.CITY_N === 'WAYCROSS SHOP'
+  });
+
+  var febLista = this.closetDis.filter((el)=> {
+    return el.CITY_N == 'HUNTINGTON SHOP'
+  });
+
+  var marchLista = this.closetDis.filter((el)=> {
+    return el.CITY_N === 'CUMBERLAND SHOP'
+  });
+  console.log("waycross")
+  console.log(this.closetDis)
+  var dataEmailsSubscriptionChart = {
+    labels: ['WAYCROSS','HUNTINGTON','CUMBERLAND'],
+    series: [
+      [janLista.length,febLista.length,marchLista.length]
+  ]
+  };
+  var optionsEmailsSubscriptionChart = {
+      axisX: {
+          showGrid: false
+      },
+      low: 0,
+      high: 50,
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
+  };
+  var responsiveOptions: any[] = [
+    ['screen and (max-width: 640px)', {
+      seriesBarDistance: 5,
+      axisX: {
+        labelInterpolationFnc: function (value) {
+          return value[0];
+        }
+      }
+    }]
+  ];
+  var emailsSubscriptionChart = new Chartist.Bar('#emailsSubscriptionChart', dataEmailsSubscriptionChart, optionsEmailsSubscriptionChart, responsiveOptions);
+
+  //start animation for the Emails Subscription Chart
+  this.startAnimationForBarChart(emailsSubscriptionChart);
+
+ 
+       
+      });
+   });      
+}
+
+findClosestDestination(compareDestList, compareShopList) {
+  var distance;
+  var distanceArray = [];
+  for (var i=0; i<compareDestList.length; i++) {
+    for (var j=0; j<compareShopList.length; j++) {
+      distance = this.getDistanceFromLatLonInKm(compareDestList[i].DEST_LAT, compareDestList[i].DEST_LON, compareShopList[j].LAT, compareShopList[j].LON);
+      if (distance <= 125) {
+          compareDestList[i].CITY_N = compareShopList[j].CITY_N;
+          distanceArray.push(compareDestList[i]);
+      }
+    }
+  }
+  return distanceArray;
+}
+
+getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 3959; // Radius of the earth in miles
+  var a =
+  Math.sin(this.deg2rad(lat1)) * Math.sin(this.deg2rad(lat2)) +
+  Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+  Math.cos(this.deg2rad(lon2-lon1));
+  var c = Math.acos(a);
+  var d = R * c; // Distance in miles
+  return d;
+}
+
+deg2rad(deg) {
+return deg*(Math.PI/180);
+} 
+
+delete(loco) {
+ this.toBeDeleted = loco.value;
+ console.log('asdfa');
+  console.log(loco.value);
+}
+
+format(data) {
+  return data.split('-')[0];
 }
 
 //TABLE OPERATIONS
@@ -367,10 +451,14 @@ resetForm(taskForm?: NgForm) {
        console.log(taskForm.value);
       this.taskService.insertTask(taskForm.value);
       console.log("Task Created");
+      console.log(taskForm.value.$key);
+      //this.taskService.deleteLoco(this.toBeDeleted);
+      this.closetDis.pop();
     }else{
       this.taskService.updateTask(taskForm.value);
       this.resetForm(taskForm);
       console.log("Task Updated");
+      console.log(taskForm.value.$key);
     }
       
   }

@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
         });
 
         this.urgencyTaskList = this.taskList.filter((el)=> {
-        return el.status === 'Ad Hoc'
+        return el.status === 'Pending'
         });
 
         this.completedTaskList = this.taskList.filter((el)=> {
