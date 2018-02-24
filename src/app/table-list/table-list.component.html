@@ -1,6 +1,14 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
+            <div class="form-group form-black label-floating is-empty">
+                <label class="control-label">Shop Locations</label>
+                <div class="dropdown">
+                    <select class="btn btn-info statusDropdown" (change) = "changeShop($event)">
+                        <option *ngFor="let i of ptcShops">{{i.CITY_N}}</option>
+                    </select>
+                </div>
+            </div>
             <div class="col-md-12">
                     <form class="navbar-form navbar-right" role="search">
                             <div class="form-group form-black is-empty">
@@ -34,33 +42,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
+                                <tr *ngFor="let train of locomotives">
+                                    <td>{{train.LOCO_I}}</td>
+                                    <td>{{train.TRAIN_I}}</td>
+                                    <td>{{train.DEVICE_I}}</td>
+                                    <td>{{train.LATITUDE_M}}</td>
+                                    <td>{{train.LONGITUDE_M}}</td>
+                                    <td>{{train.LOCO_SPEED_M}}</td>
+                                    <td>{{train.SIGNAL_STRENGTH_M}}</td>
+                                    <td>{{task.SIGNAL_QUALITY_C}}</td>
+                                    <td>{{task.TRANS_SUBDIV_C}}</td>
+                                    <td>{{task.REPORT_EST_D}}</td> 
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>

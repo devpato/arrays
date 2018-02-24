@@ -7,6 +7,7 @@ export class TaskService {
  taskList: AngularFireList<any>;
  destList: AngularFireList<any>;
  shopList: AngularFireList<any>;
+ locoList: AngularFireList<any>; 
  selectedTask: any;
  constructor(private firebase :AngularFireDatabase ) { }
 
@@ -25,6 +26,10 @@ export class TaskService {
    return this.destList;
  }
 
+ getLocamotiveData() {
+   this.locoList = this.firebase.list('/train'); //if we want to do the users taks will be /Y4072/tasks
+   return this.locoList;
+ }
 
  insertTask(task : any)
  {
