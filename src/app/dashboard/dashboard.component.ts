@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
   completedNumber: number;
   inProgressNumber: number;
   notStartedNumber: number;
+  shopList: any[];
+  destList: any[];
   urgencyTaskList: any[];
   completedTaskList: any[];
   inProgressTaskList: any[];
@@ -194,6 +196,54 @@ export class DashboardComponent implements OnInit {
     this.notStartedNumber = this.notStartedTaskList.length;
 
    });
+
+   var y = this.taskService.getShopData();
+   y.snapshotChanges().subscribe(item => {
+     this.taskList = [];
+     item.forEach(element => {
+       var q = element.payload.toJSON();
+       q["$key"] = element.key;
+       this.taskList.push(q as any);
+     });
+
+     this.shopList = this.taskList.filter((el)=> {
+        return el.PTC === 1; 
+     });
+   });
+
+    var destination = this.taskService.getDestinationData();
+    destination.snapshotChanges().subscribe(item => {
+        this.taskList = [];
+        item.forEach(element => {
+          var q = element.payload.toJSON();
+          q["$key"] = element.key;
+          this.taskList.push(q as any);
+        });
+
+        this.destList = this.taskList;
+     });
+}
+
+getDistanceFromLatLonInKm(at1,lon1,lat2,lon2) {
+    var R = 6371; // Radius of the earth in km
+
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+
+    var dLon = deg2rad(lon2-lon1);
+
+    var a =
+
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+  var d = R * c; // Distance in km
+
+  return d;
 }
 
 //TABLE OPERATIONS
