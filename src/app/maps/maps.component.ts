@@ -38,7 +38,7 @@ export class MapsComponent implements OnInit {
          return el.PTC === 1; 
       });
 
-      var z = this.taskService.getShops();
+      var z = this.taskService.getDestinationData();
       z.snapshotChanges().subscribe(item => {
          this.list = [];
          item.forEach(element => {
@@ -52,10 +52,7 @@ export class MapsComponent implements OnInit {
          console.log(this.closetDis);
          console.log("***")
        });
-    });
-     
-      
-     
+    });       
   }
 
   findClosestDestination(compareDestList, compareShopList) {
@@ -63,7 +60,7 @@ export class MapsComponent implements OnInit {
     var distanceArray = [];
     for (var i=0; i<compareDestList.length; i++) {
       for (var j=0; j<compareShopList.length; j++) {
-        distance = this.getDistanceFromLatLonInKm(compareDestList[i].LAT, compareDestList[i].LON, compareShopList[j].LAT, compareShopList[j].LON);
+        distance = this.getDistanceFromLatLonInKm(compareDestList[i].DEST_LAT, compareDestList[i].DEST_LON, compareShopList[j].LAT, compareShopList[j].LON);
         if (distance <= 125) {
             distanceArray.push(compareDestList[i]);
         }
@@ -74,52 +71,19 @@ export class MapsComponent implements OnInit {
     return distanceArray;
   }
 
-  findClosestDestinationShopList(compareDestList, compareShopList) {
-    var distance;
-    for (var i=0; i<compareDestList.length; i++) {
-      for (var j=0; j<compareShopList[i].length; j++) {
-        distance = this.getDistanceFromLatLonInKm(compareDestList[i].LAT, compareDestList[i].LON, compareShopList[j].LAT, compareShopList[j].LON);
-        if (distance <= 125) {
-          if (compareShopList[j].shopList && typeof compareShopList[j].shopList.isArray() ) {
-            compareShopList[j].shopList.push(compareDestList[i]);
-          } else {
-            compareShopList[j].shopList = [];
-            compareShopList[j].shopList.push(compareDestList[i]);
-          }
-        }
-      }
-      // Thres hold for shop area is 125 feet
-    }
-  
-    return compareShopList;
-  }
-
   getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-    var R = 6371; // Radius of the earth in km
-
-    var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
-
-    var dLon = this.deg2rad(lon2-lon1);
-
+    var R = 3959; // Radius of the earth in miles
     var a =
-
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-
-    Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-  var d = R * c; // Distance in km
-
-  return d;
+                  Math.sin(this.deg2rad(lat1)) * Math.sin(this.deg2rad(lat2)) +
+                  Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+                  Math.cos(this.deg2rad(lon2-lon1));
+    var c = Math.acos(a);
+    var d = R * c; // Distance in miles
+    return d;
 }
 
 deg2rad(deg) {
   return deg*(Math.PI/180);
-}
-
-  
+} 
 
 }
