@@ -224,18 +224,38 @@ export class DashboardComponent implements OnInit {
      });
 }
 
-getDistanceFromLatLonInKm(at1,lon1,lat2,lon2) {
-    var R = 6371; // Radius of the earth in km
+findClosestDestination(compareDestList, compareShopList) {
+  var distance;
+  for (var i=0; i<compareDestList.length; i++) {
+    for (var j=0; j<compareShopList[i].length; j++) {
+      distance = this.getDistanceFromLatLonInKm(compareDestList[i].LAT, compareDestList[i].LON, compareShopList[j].LAT, compareShopList[j].LON);
+      if (distance <= 125) {
+        if (compareShopList[j].shopList && typeof compareShopList[j].shopList.isArray() ) {
+          compareShopList[j].shopList.push(compareDestList[i]);
+        } else {
+          compareShopList[j].shopList = [];
+          compareShopList[j].shopList.push(compareDestList[i]);
+        }
+      }
+    }
+    // Thres hold for shop area is 125 feet
+  }
 
-    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  return compareShopList;
+}
 
-    var dLon = deg2rad(lon2-lon1);
+getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    var R = 3959; // Radius of the earth in (6371) km
+
+    var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+
+    var dLon = this.deg2rad(lon2-lon1);
 
     var a =
 
     Math.sin(dLat/2) * Math.sin(dLat/2) +
 
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
 
     Math.sin(dLon/2) * Math.sin(dLon/2);
 
@@ -244,6 +264,12 @@ getDistanceFromLatLonInKm(at1,lon1,lat2,lon2) {
   var d = R * c; // Distance in km
 
   return d;
+}
+
+deg2rad(deg) {
+
+  return deg * (Math.PI/180)
+
 }
 
 //TABLE OPERATIONS
