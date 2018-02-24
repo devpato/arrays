@@ -54,7 +54,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats" >
                         <div class="card-header" data-background-color="blue">
-                            <i class="fa fa-hourglass-o"></i>
+                            <i class="fa fa fa-train"></i>
                         </div>
                         <div class="card-content">
                             <p class="category">Incoming</p>
@@ -80,25 +80,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                        <div class="card" >
+                            <div class="card-header card-chart" data-background-color="red">
+                                <div class="ct-chart" id="completedTasksChart"></div>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="title">Ad Hoc</h4>
+                            </div>
+                        </div>
+                    </div>
 
                 <div class="col-md-4">
                     <div class="card" >
-                        <div class="card-header card-chart" data-background-color="orange">
+                        <div class="card-header card-chart" data-background-color="blue">
                             <div class="ct-chart" id="emailsSubscriptionChart"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="title">In Progress</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card" >
-                        <div class="card-header card-chart" data-background-color="red">
-                            <div class="ct-chart" id="completedTasksChart"></div>
-                        </div>
-                        <div class="card-content">
-                            <h4 class="title">Ad Hoc</h4>
+                            <h4 class="title">Incoming</h4>
                         </div>
                     </div>
                 </div>
@@ -115,7 +114,7 @@
                                         <li class="active">
                                             <a href="#profile" data-toggle="tab"  data-background-color="orange">
                                                 <i class="material-icons"></i>
-                                                Pending
+                                                In Progress
                                             <div class="ripple-container"></div></a>
                                         </li>
                                         <li class="">
@@ -136,7 +135,7 @@
                         </div>
 
                         <div class="card-content">
-                            <div class="tab-content">
+                            <div class="tab-content" style="height: 515px; overflow-y:auto">
                                 <div class="tab-pane active" id="profile">
                                     <table class="table">
                                         <tbody>
