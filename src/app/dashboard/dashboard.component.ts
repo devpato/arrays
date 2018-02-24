@@ -10,6 +10,15 @@ import { NgForm } from '@angular/forms'
 })
 export class DashboardComponent implements OnInit {
   taskList: any[]
+  urgencyNumber: number;
+  completedNumber: number;
+  inProgressNumber: number;
+  notStartedNumber: number;
+  urgencyTaskList: any[];
+  completedTaskList: any[];
+  inProgressTaskList: any[];
+  notStartedTaskList: any[];
+
   constructor(private taskService : TaskService) { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -163,6 +172,27 @@ export class DashboardComponent implements OnInit {
        y["$key"] = element.key;
        this.taskList.push(y as any);
      });
+
+     this.urgencyTaskList = this.taskList.filter((el)=> {
+      return el.status === 'Ad Hoc'
+    });
+
+    this.completedTaskList = this.taskList.filter((el)=> {
+      return el.status === 'Completed'
+    });
+
+    this.notStartedTaskList = this.taskList.filter((el)=> {
+      return el.status === 'Incoming'
+    });
+
+    this.inProgressTaskList = this.taskList.filter((el)=> {
+      return el.status === 'In Progress'
+    });
+    this.urgencyNumber = this.urgencyTaskList.length;
+    this.completedNumber = this.completedTaskList.length;
+    this.inProgressNumber = this.inProgressTaskList.length;
+    this.notStartedNumber = this.notStartedTaskList.length;
+
    });
 }
 

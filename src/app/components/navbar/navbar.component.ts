@@ -1,20 +1,31 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { TaskService } from '../../shared/task.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  providers: [TaskService]
 })
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    taskList: any[]
+    urgencyNumber: number;
+    completedNumber: number;
+    inProgressNumber: number;
+    notStartedNumber: number;
+    urgencyTaskList: any[];
+    completedTaskList: any[];
+    inProgressTaskList: any[];
+    notStartedTaskList: any[];
     
 
-    constructor(location: Location,  private element: ElementRef) {
+    constructor(location: Location,  private element: ElementRef, private taskService : TaskService) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -23,6 +34,39 @@ export class NavbarComponent implements OnInit {
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+
+      //Pull the data
+    var x = this.taskService.getData();
+    x.snapshotChanges().subscribe(item => {
+        this.taskList = [];
+        item.forEach(element => {
+        var y = element.payload.toJSON();
+        y["$key"] = element.key;
+        this.taskList.push(y as any);
+        });
+
+        this.urgencyTaskList = this.taskList.filter((el)=> {
+        return el.status === 'Ad Hoc'
+        });
+
+        this.completedTaskList = this.taskList.filter((el)=> {
+        return el.status === 'Completed'
+        });
+
+        this.notStartedTaskList = this.taskList.filter((el)=> {
+        return el.status === 'Not Started'
+        });
+
+        this.inProgressTaskList = this.taskList.filter((el)=> {
+        return el.status === 'In Progress'
+        });
+        this.urgencyNumber = this.urgencyTaskList.length;
+        this.completedNumber = this.completedTaskList.length;
+        this.inProgressNumber = this.inProgressTaskList.length;
+        this.notStartedNumber = this.notStartedTaskList.length;
+
+    });
+
     }
 
     sidebarOpen() {

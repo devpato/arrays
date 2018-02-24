@@ -5,11 +5,11 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats" >
                         <div class="card-header" data-background-color="orange">
-                            <i class="material-icons">content_copy</i>
+                            <i class="fa fa-clock-o"></i>
                         </div>
                         <div class="card-content">
                             <p class="category">In Progress</p>
-                            <h3 class="title">49</h3>
+                            <h3 class="title">{{inProgressNumber}}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -21,11 +21,11 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats" >
                         <div class="card-header" data-background-color="green">
-                            <i class="material-icons">icon</i>
+                                <i class="fa fa-check-square-o"></i>
                         </div>
                         <div class="card-content">
                             <p class="category">Completed</p>
-                            <h3 class="title">500</h3>
+                            <h3 class="title">{{completedNumber}}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -40,8 +40,8 @@
                             <i class="material-icons">info_outline</i>
                         </div>
                         <div class="card-content">
-                            <p class="category">Urgency Issues</p>
-                            <h3 class="title">75</h3>
+                            <p class="category">Ad Hoc</p>
+                            <h3 class="title">{{urgencyTaskList.length}}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -54,11 +54,11 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats" >
                         <div class="card-header" data-background-color="blue">
-                            <i class="fa fa-task"></i>
+                            <i class="fa fa-hourglass-o"></i>
                         </div>
                         <div class="card-content">
-                            <p class="category">Not Started</p>
-                            <h3 class="title">5</h3>
+                            <p class="category">Incoming</p>
+                            <h3 class="title">{{notStartedNumber}}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -76,7 +76,7 @@
                             <div class="ct-chart" id="dailySalesChart"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="title">LOCO</h4>
+                            <h4 class="title">Completed</h4>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                             <div class="ct-chart" id="emailsSubscriptionChart"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="title">Pending Issues</h4>
+                            <h4 class="title">In Progress</h4>
                         </div>
                     </div>
                 </div>
@@ -98,19 +98,19 @@
                             <div class="ct-chart" id="completedTasksChart"></div>
                         </div>
                         <div class="card-content">
-                            <h4 class="title">Emergency Issues</h4>
+                            <h4 class="title">Ad Hoc</h4>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-8 col-md-12">
                     <div class="card card-nav-tabs" >
                         <div class="card-header">
                             <div class="nav-tabs-navigation">
                                 <div class="nav-tabs-wrapper">
-                                    <span class="nav-tabs-title" style="color:white">My Tasks:</span>
+                                    <span class="nav-tabs-title" style="color:white">Tasks:</span>
                                     <ul class="nav nav-tabs" data-tabs="tabs">
                                         <li class="active">
                                             <a href="#profile" data-toggle="tab"  data-background-color="orange">
@@ -127,7 +127,7 @@
                                         <li class="">
                                             <a href="#settings" data-toggle="tab"  data-background-color="red">
                                                 <i class="material-icons"></i>
-                                                Emergency
+                                                Ad Hoc
                                             <div class="ripple-container"></div></a>
                                         </li>
                                     </ul>
@@ -148,13 +148,12 @@
                                                 <th>ARRIVAL DATE</th>
                                                 <th>ACTION</th>
                                             </tr>
-                                            <tr *ngFor="let task of taskList">
+                                            <tr *ngFor="let task of inProgressTaskList">
                                                 <td>{{task.locoId}}</td>
                                                 <td>{{task.repairman}}</td>
                                                 <td>{{task.status}}</td>
                                                 <td>{{task.description}}</td>
                                                 <td>{{task.arrivalDate}}</td>
-                                                <td>{{task.date}}</td>
                                                 <td class="td-actions text-right">
                                                     <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs" (click)="onEdit(task)">
                                                         <i class="material-icons">edit</i>
@@ -171,42 +170,28 @@
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes" checked>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asdfasfadsfd
-                                                </td>
+                                                <th>LOCO ID</th>
+                                                <th>REPAIRMAN</th>
+                                                <th>STATUS</th>
+                                                <th>DESCRIPTION</th>
+                                                <th>ARRIVAL DATE</th>
+                                                <th>ACTION</th>
+                                            </tr>
+                                            <tr *ngFor="let task of completedTaskList">
+                                                <td>{{task.locoId}}</td>
+                                                <td>{{task.repairman}}</td>
+                                                <td>{{task.status}}</td>
+                                                <td>{{task.description}}</td>
+                                                <td>{{task.arrivalDate}}</td>
                                                 <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs">
+                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs" (click)="onEdit(task)">
                                                         <i class="material-icons">edit</i>
                                                     </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="onDelete(task.$key)">
                                                         <i class="material-icons">close</i>
                                                     </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes">
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asdfasfadsfd</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn  btn-simple btn-xs">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                                </td> 
+                                            </tr>                                          
                                         </tbody>
                                     </table>
                                 </div>
@@ -214,60 +199,28 @@
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes">
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asdfasfadsfd</td>
+                                                <th>LOCO ID</th>
+                                                <th>REPAIRMAN</th>
+                                                <th>STATUS</th>
+                                                <th>HARDWARE</th>
+                                                <th>ARRIVAL DATE</th>
+                                                <th>ACTION</th>
+                                            </tr>
+                                            <tr *ngFor="let task of urgencyTaskList">
+                                                <td>{{task.locoId}}</td>
+                                                <td>{{task.repairman}}</td>
+                                                <td>{{task.status}}</td>
+                                                <td>{{task.description}}</td>
+                                                <td>{{task.arrivalDate}}</td>
                                                 <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs">
+                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs" (click)="onEdit(task)">
                                                         <i class="material-icons">edit</i>
                                                     </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" (click)="onDelete(task.$key)">
                                                         <i class="material-icons">close</i>
                                                     </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes" checked>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asdfasfadsfd
-                                                </td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="optionsCheckboxes">
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td>asdfasfadsfd</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-simple btn-xs">
-                                                        <i class="material-icons">edit</i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                                </td> 
+                                            </tr>                                          
                                         </tbody>
                                     </table>
                                 </div>
@@ -306,9 +259,10 @@
                                             <label class="control-label">Status</label>
                                             <div class="dropdown">
                                                 <select #status="ngModel" class="btn btn-info statusDropdown" name="status" [(ngModel)]="taskService.selectedTask.status">
-                                                    <option>Urgency</option>
+                                                    <option disabled selected value> --Status -- </option>
+                                                    <option>Ad Hoc</option>
                                                     <option>Completed</option>
-                                                    <option>Not Started</option>
+                                                    <option>Incoming</option>
                                                     <option>In Progress</option>
                                                 </select>
                                             </div>
@@ -326,7 +280,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group form-black label-floating is-empty">
-                                            <label class="control-label">Description</label>
+                                            <label class="control-label">Hardware</label>
                                             <input #description="ngModel"  name="description" [(ngModel)]="taskService.selectedTask.description" type="text" class="form-control" >
                                         </div>
                                     </div>
