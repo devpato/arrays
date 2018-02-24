@@ -26,11 +26,6 @@ export class TaskService {
    return this.destList;
  }
 
- getLocamotiveData() {
-   this.locoList = this.firebase.list('/train'); //if we want to do the users taks will be /Y4072/tasks
-   return this.locoList;
- }
-
  insertTask(task : any)
  {
    this.taskList.push({

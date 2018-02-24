@@ -13,8 +13,7 @@ export class TableListComponent implements OnInit {
   destinations : any[]; 
   closetDis: any[];
   list: any[];
-  trains: any[];
-  trainList: any[];
+  groupDest: any[];
   constructor(private taskService : TaskService) { }
 
   ngOnInit() {
@@ -41,35 +40,28 @@ export class TableListComponent implements OnInit {
          });
         this.closetDis = this.findClosestDestination(this.list,this.ptcShops);
 
-        var z = this.taskService.getDestinationData();
-        z.snapshotChanges().subscribe(item => {
-          this.trains = [];
-          item.forEach(element => {
-            var y = element.payload.toJSON();
-            y["$key"] = element.key;
-            this.trains.push(y as any);
-          });
-
-          this.trainList = this.mapTrainsWithDest(this.destinations, this.trains);
-        });
+       // this.trainList = this.mapTrainsWithDest(this.closetDis, this.trains);
        });
     });
   }
 
-  mapTrainsWithDest(destList, trainList) {
+  mapCityWithDest(destList, shopList) {
     var tempList = [];
     for (var i=0; i<destList.length; i++) {
-      for (var j=0; j<trainList.length; j++) {
-        if (destList[i].TRAIN_I === trainList[j].TRAIN_I) {
-          tempList.push(trainList[j]);
+      for (var j=0; j<shopList.length; j++) {
+        if (destList[i].CITY_N === shopList[j]) {
+          tempList.push(destList[j]);
         }
       }
     }
     return tempList;
   }
 
-  changeShop() {
-
+  changeShop(value) {
+    var citySelected = [];
+    citySelected.push(value);
+    this.groupDest = this.mapCityWithDest(this.closetDis, citySelected);
+    console.log(this.groupDest);
   }
 
   findClosestDestination(compareDestList, compareShopList) {
@@ -77,8 +69,9 @@ export class TableListComponent implements OnInit {
     var distanceArray = [];
     for (var i=0; i<compareDestList.length; i++) {
       for (var j=0; j<compareShopList.length; j++) {
-        distance = this.getDistanceFromLatLonInKm(compareDestList[i].LAT, compareDestList[i].LON, compareShopList[j].LAT, compareShopList[j].LON);
+        distance = this.getDistanceFromLatLonInKm(compareDestList[i].DEST_LAT, compareDestList[i].DEST_LON, compareShopList[j].LAT, compareShopList[j].LON);
         if (distance <= 125) {
+            compareDestList[i].CITY_N = compareShopList[j].CITY_N;
             distanceArray.push(compareDestList[i]);
         }
       }

@@ -79,9 +79,7 @@ export class MapsComponent implements OnInit {
     return d;
 }
 
-deg2rad(deg) {
-  return deg*(Math.PI/180);
-}
-
-
+  deg2rad(deg) {
+    return deg*(Math.PI/180);
+  }
 }
